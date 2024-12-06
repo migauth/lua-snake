@@ -3,7 +3,7 @@
 --Add controls
 --Add boundaries
 
-local speed = 200
+local speed = 1000
 local length = 10
 
 
@@ -16,18 +16,27 @@ end
 function love.update(dt)
   print("X= ", x, "Y= ", y)
 
+
   if love.keyboard.isDown("right") then
-    x = x + 100 * dt
+    x = x + speed * dt
+  elseif love.keyboard.isDown("left") then
+    x = x - speed * dt
+  elseif love.keyboard.isDown("down") then
+    y = y + speed * dt
+  elseif love.keyboard.isDown("up") then
+    y = y - speed * dt
   end
-  if love.keyboard.isDown("left") then
-    x = x - 100 * dt
+
+  if x < 0 then
+    x = 1
+  elseif x > 790 then
+    x = 789
+  elseif y < 0 then
+    y = 1
+  elseif y > 590 then
+    y = 589
   end
-  if love.keyboard.isDown("down") then
-    y = y + 100 * dt
-  end
-  if love.keyboard.isDown("up") then
-    y = y - 100 * dt
-  end
+
 end
 
 function love.draw()
