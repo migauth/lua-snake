@@ -16,7 +16,6 @@ end
 function love.update(dt)
   print("X= ", x, "Y= ", y)
 
-
   if love.keyboard.isDown("right") then
     x = x + speed * dt
   elseif love.keyboard.isDown("left") then
@@ -41,5 +40,8 @@ end
 
 function love.draw()
   love.graphics.rectangle('fill', x, y, length, 10)
+  if x > 100 then
+    love.graphics.print("hi!", 100, 100)
+  end
 end
 
