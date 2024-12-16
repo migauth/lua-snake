@@ -9,18 +9,26 @@ local length = 10
 local x = 100
 local y = 100
 
-function createRect()
+local function createRect()
   rect = {}
   rect.width = 10
   rect.length = 10
   rect.x = 100
   rect.y = 100
 
-  table.insert(listOfRectangles, rect)
+  table.insert(rectangles, rect)
 end
 
 function love.load()
-  listOfRectangles = {}
+  rectangles = {}
+  tick = require"tick"
+
+  -- card = love.graphics.newImage("creamboi.png")
+
+  createSquare = false
+
+  tick.delay(function () createSquare = true end, 2)
+
   createRect()
 end
 
@@ -32,6 +40,8 @@ end
 
 function love.update(dt)
   print("X= ", rect.x, "Y= ", rect.y)
+
+  tick.update(dt)
 
   if love.keyboard.isDown("d") then
     rect.x = rect.x + speed * dt
@@ -56,7 +66,12 @@ end
 
 function love.draw()
   love.graphics.rectangle('fill', rect.x, rect.y, rect.length, rect.width)
+  -- love.graphics.draw(card, 200, 200)
   if rect.x > 100 then
     love.graphics.print("hi!", 100, 100)
+  end
+
+  if createSquare then
+    -- love.graphics.rectangle("fill", math.random(100,500), math.random(100,500), 10, 10)
   end
 end
