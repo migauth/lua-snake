@@ -3,6 +3,9 @@
 --Add controls
 --Add boundaries
 
+WINDOW_HEIGHT = 720
+WINDOW_WIDTH = 1280
+
 
 local speed = 1000
 local length = 10
@@ -30,14 +33,10 @@ local function Rect()
 end
 
 function love.load()
-  -- rectangles = {}
-  -- tick = require"tick"
-
-  -- card = love.graphics.newImage("creamboi.png")
-
-  -- createSquare = false
-
-  -- tick.delay(function () createSquare = true end, 2)
+  love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT, {
+    fullscreen = false,
+    resizable = false
+  })
 
   player1 = Rect()
 end
