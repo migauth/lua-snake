@@ -3,8 +3,13 @@
 --Add controls
 --Add boundaries
 
-WINDOW_HEIGHT = 720
-WINDOW_WIDTH = 1280
+push = require 'push'
+
+WINDOW_HEIGHT = 600
+WINDOW_WIDTH = 800
+
+VIRTUAL_HEIGHT = 20
+VIRTUAL_WIDTH = 50
 
 
 local speed = 1000
@@ -33,9 +38,16 @@ local function Rect()
 end
 
 function love.load()
-  love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT, {
+  -- love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT, {
+  --   fullscreen = false,
+  --   resizable = false,
+  --   vsync = true
+  -- })
+
+  push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
     fullscreen = false,
-    resizable = false
+    resizable = false,
+    vsync = true
   })
 
   player1 = Rect()
@@ -77,8 +89,16 @@ function love.update(dt)
 end
 
 function love.draw()
+  love.graphics.printf(
+    "SNAKE",
+    0,
+    WINDOW_HEIGHT / 2-6,
+    WINDOW_WIDTH,
+    "center"
+  )
+
   love.graphics.rectangle('fill', player1.x, player1.y, player1.length, player1.width)
-  -- love.graphics.draw(card, 200, 200)
+
   if player1.x > 100 then
     love.graphics.print("hi!", 100, 100)
   end
